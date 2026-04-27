@@ -5,32 +5,32 @@ let yellowColor = "#FFCB22";
 let quoteSets = {
   comparison: [
     '“I can feel inspired and at the same time feel like other people are living the life I wish I had.”',
-    '"I compare myself without meaning to."',
-    '"I know it is curated, but it still gets to me."'
+    '“I often feel like my life is boring when i scroll through instagram.”',
+    '“If I don’t scroll, I get FOMO.”'
   ],
 
   timeloss: [
-    '"I did not notice the time."',
-    '"I was only going to check for a minute."',
-    '"Wait... how long have I been here?"'
+    '“There comes a point where I ‘wake up’ and realize how long I’ve been on my phone.”',
+    '“When I scroll while my partner is home, it feels like I’m wasting our quality time.”',
+    '“I always end up scrolling no matter what i opened Instagram for.”'
   ],
 
   compulsion: [
-    '"Just one more."',
-    '"I keep checking without thinking."',
-    '"I do not know why I opened it again."'
+    '“My biggest addiction isn’t apps, it’s the feeling of ‘checking’.”',
+    '“I get this ‘lottery’ feeling. If I scroll just one more time, something good might show up.”',
+    '“As soon as I wake up, I grab my phone quickly and scroll. It feels like an addiction.”'
   ],
 
   emptiness: [
-    '"After scrolling for a long time, I can get an empty feeling."',
+    '“After scrolling for a long time, I can get an empty feeling.”',
     '"I scroll because I do not know what else to do."',
-    '"I can be online all day and still feel socially empty."'
+    '“I can be online all day and still feel socially empty.”'
   ],
 
   overstimulation: [
-    '"I cannot keep up."',
-    '"I do not want to miss it."',
-    '"It is too much, but I stay."'
+    '“When I’ve had too many impressions, it feels like my brain doesn’t have anything left to give.”',
+    '“My biggest problem isn’t screen time, it’s that I can’t remember what I watched.”',
+    '“Scrolling entertains me, but also overwhelms me.”'
   ]
 };
 
