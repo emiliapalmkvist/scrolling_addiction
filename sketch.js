@@ -129,7 +129,7 @@ function drawQuoteStage(x, y, contentW) {
 function drawRevealStage(x, y, contentW) {
   textAlign(LEFT, TOP);
 
-  fill(245, 216, 63);
+  fill(yellowColor);
   textStyle(BOLD);
   textSize(29);
   textLeading(35);
