@@ -1,5 +1,6 @@
 let instagramURL = "https://www.instagram.com/reels/";
 let stage = 0;
+let yellowColor = "#FFCB22";
 
 let quoteSets = {
   comparison: [
@@ -62,7 +63,7 @@ function setup() {
 }
 
 function draw() {
-  background(245, 216, 63);
+  background(yellowColor);
 
   let cardW = min(width - 40, 430);
   let cardH = min(height - 40, 760);
@@ -79,7 +80,7 @@ function draw() {
 
   textAlign(LEFT, TOP);
   textStyle(BOLD);
-  fill(245, 216, 63);
+  fill(yellowColor);
   textSize(13);
   text("WARNING", x, y);
 
@@ -164,8 +165,8 @@ function drawRevealStage(x, y, contentW) {
 function drawFinalStage(x, y, contentW) {
   textAlign(LEFT, TOP);
 
-  fill(245, 216, 63);
-  textStyle(BOLD);
+  fill(yellowColor);
+  textStyle(BOLD); 
   textSize(27);
   textLeading(33);
   text("YOU ARE ABOUT TO ENTER THE FEED.", x, y, contentW);
@@ -191,7 +192,7 @@ function drawFinalStage(x, y, contentW) {
 
   continueBtn = { x: x, y: y, w: contentW, h: 60 };
 
-  fill(245, 216, 63);
+  fill(yellowColor);
   rect(continueBtn.x, continueBtn.y, continueBtn.w, continueBtn.h, 999);
 
   fill(20);
@@ -254,7 +255,7 @@ function drawPopup() {
     h: buttonH
   };
 
-  fill(245, 216, 63);
+  fill(yellowColor);
   rect(yesBtn.x, yesBtn.y, yesBtn.w, yesBtn.h, 999);
 
   fill(20);
@@ -273,7 +274,7 @@ function drawPopup() {
 function drawNextButton(x, y, w, label) {
   nextBtn = { x: x, y: y, w: w, h: 58 };
 
-  fill(245, 216, 63);
+  fill(yellowColor);
   rect(nextBtn.x, nextBtn.y, nextBtn.w, nextBtn.h, 999);
 
   fill(20);
