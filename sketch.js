@@ -40,6 +40,10 @@ let currentQuotes = [];
 let nextBtn = { x: 0, y: 0, w: 0, h: 58 };
 let continueBtn = { x: 0, y: 0, w: 0, h: 60 };
 
+let checkbox = { x: 0, y: 0, size: 24 };
+let stopBtn = { x: 0, y: 0, w: 0, h: 54 };
+let finalChecked = false;
+
 let showPopup = false;
 let yesBtn = { x: 0, y: 0, w: 0, h: 50 };
 let noBtn = { x: 0, y: 0, w: 0, h: 50 };
@@ -166,44 +170,169 @@ function drawFinalStage(x, y, contentW) {
   textAlign(LEFT, TOP);
 
   fill(yellowColor);
-  textStyle(BOLD); 
-  textSize(27);
-  textLeading(33);
+  textStyle(BOLD);
+  textSize(24);
+  textLeading(30);
   text("YOU ARE ABOUT TO ENTER THE FEED.", x, y, contentW);
 
-  y += 110;
+  y += 80;
 
-  fill(255);
+  fill(230);
   textStyle(NORMAL);
-  textSize(18);
-  textLeading(28);
+  textSize(15);
+  textLeading(21);
+  text(
+    "What begins as a quick check may become extended, repetitive, and difficult to stop.",
+    x,
+    y,
+    contentW
+  );
 
-  text("You may continue longer than intended.", x, y, contentW);
+  y += 75;
 
-  y += 55;
+  y = drawInfoBox(
+    x,
+    y,
+    contentW,
+    "POSSIBLE SIDE EFFECTS",
+    [
+      "Time loss",
+      "Sleep disruption",
+      "Social comparison",
+      "Compulsive continuation",
+      "Loss of awareness"
+    ]
+  );
 
-  text("You may not feel finished.", x, y, contentW);
+  y += 20;
 
-  y += 55;
+  y = drawInfoBox(
+    x,
+    y,
+    contentW,
+    "ACTIVE INGREDIENTS",
+    [
+      "Infinite scroll",
+      "Algorithmic targeting",
+      "Variable reward",
+      "No natural stopping point"
+    ]
+  );
 
-  text("You may keep going even after you stop enjoying it.", x, y, contentW);
+  y += 25;
 
-  y += 120;
+  checkbox = {
+    x: x,
+    y: y + 3,
+    size: 24
+  };
 
-  continueBtn = { x: x, y: y, w: contentW, h: 60 };
+  noFill();
+  stroke(220);
+  strokeWeight(2);
+  rect(checkbox.x, checkbox.y, checkbox.size, checkbox.size, 4);
+  noStroke();
 
-  fill(yellowColor);
+  if (finalChecked) {
+    fill(yellowColor);
+    rect(checkbox.x, checkbox.y, checkbox.size, checkbox.size, 4);
+
+    fill(20);
+    textAlign(CENTER, CENTER);
+    textStyle(BOLD);
+    textSize(18);
+    text("✓", checkbox.x + checkbox.size / 2, checkbox.y + checkbox.size / 2);
+  }
+
+  fill(230);
+  textAlign(LEFT, TOP);
+  textStyle(NORMAL);
+  textSize(14);
+  textLeading(20);
+  text(
+    "I understand that continuing may override my original intention.",
+    x + 38,
+    y,
+    contentW - 38
+  );
+
+  y += 75;
+
+  continueBtn = {
+    x: x,
+    y: y,
+    w: contentW,
+    h: 54
+  };
+
+  if (finalChecked) {
+    fill(yellowColor);
+  } else {
+    fill(160);
+  }
+
   rect(continueBtn.x, continueBtn.y, continueBtn.w, continueBtn.h, 999);
 
-  fill(20);
+  fill(finalChecked ? 20 : 255);
   textAlign(CENTER, CENTER);
   textStyle(BOLD);
   textSize(16);
   text(
-    "Continue anyway",
+    "Continue to Instagram",
     continueBtn.x + continueBtn.w / 2,
     continueBtn.y + continueBtn.h / 2
   );
+
+  y += 70;
+
+  stopBtn = {
+    x: x,
+    y: y,
+    w: contentW,
+    h: 54
+  };
+
+  noFill();
+  stroke(220);
+  strokeWeight(2);
+  rect(stopBtn.x, stopBtn.y, stopBtn.w, stopBtn.h, 999);
+  noStroke();
+
+  fill(230);
+  textAlign(CENTER, CENTER);
+  textStyle(BOLD);
+  textSize(16);
+  text("Stop here", stopBtn.x + stopBtn.w / 2, stopBtn.y + stopBtn.h / 2);
+}
+
+function drawInfoBox(x, y, w, title, items) {
+  let boxH = 45 + items.length * 24 + 18;
+
+  fill(35);
+  stroke(90);
+  strokeWeight(1.5);
+  rect(x, y, w, boxH, 18);
+  noStroke();
+
+  fill(160);
+  textAlign(LEFT, TOP);
+  textStyle(BOLD);
+  textSize(13);
+  text(title, x + 18, y + 16);
+
+  fill(240);
+  textStyle(NORMAL);
+  textSize(15);
+  textLeading(23);
+
+  let itemY = y + 45;
+
+  for (let i = 0; i < items.length; i++) {
+    text("• " + items[i], x + 22, itemY);
+    itemY += 24;
+  }
+
+  return y + boxH;
 }
 
 function drawPopup() {
@@ -285,27 +414,29 @@ function drawNextButton(x, y, w, label) {
 }
 
 function handlePress(px, py) {
-  if (showPopup) {
-    if (over(yesBtn, px, py)) {
-      window.location.href = instagramURL;
-      return;
-    }
-
-    if (over(noBtn, px, py)) {
-      showPopup = false;
-      return;
-    }
-
-    return;
-  }
-
   if (stage <= 2 && over(nextBtn, px, py)) {
     stage++;
     return;
   }
 
-  if (stage === 3 && over(continueBtn, px, py)) {
-    showPopup = true;
+  if (stage === 3) {
+    if (overCheckbox(px, py)) {
+      finalChecked = !finalChecked;
+      return;
+    }
+
+    if (over(continueBtn, px, py)) {
+      if (finalChecked) {
+        window.location.href = instagramURL;
+      }
+      return;
+    }
+
+    if (over(stopBtn, px, py)) {
+      stage = 0;
+      finalChecked = false;
+      return;
+    }
   }
 }
 
@@ -337,6 +468,15 @@ function over(btn, px, py) {
     px <= btn.x + btn.w &&
     py >= btn.y &&
     py <= btn.y + btn.h
+  );
+}
+
+function overCheckbox(px, py) {
+  return (
+    px >= checkbox.x &&
+    px <= checkbox.x + checkbox.size &&
+    py >= checkbox.y &&
+    py <= checkbox.y + checkbox.size
   );
 }
 
