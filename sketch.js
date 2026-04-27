@@ -106,22 +106,24 @@ function drawQuoteStage(x, y, contentW) {
   textLeading(38);
   text(currentQuotes[stage], x, y, contentW);
 
-  y += 220;
+  let cardH = min(height - 40, 760);
+  let cardY = (height - cardH) / 2;
+
+  let buttonY = cardY + cardH - 230;
+  let grayTextY = buttonY - 95;
 
   fill(200);
   textStyle(NORMAL);
   textSize(16);
   textLeading(22);
   text(
-    "These are not warnings from a system. They are lived experiences.",
+    "These are not warnings from a system.\nThey are lived experiences.",
     x,
-    y,
+    grayTextY,
     contentW
   );
 
-  y += 120;
-
-  drawNextButton(x, y, contentW, "Continue");
+  drawNextButton(x, buttonY, contentW, "Continue");
 }
 
 function drawRevealStage(x, y, contentW) {
