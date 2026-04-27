@@ -210,7 +210,7 @@ function drawPopup() {
   rect(0, 0, width, height);
 
   let popupW = min(width - 50, 360);
-  let popupH = 330;
+  let popupH = 350;
   let popupX = (width - popupW) / 2;
   let popupY = (height - popupH) / 2;
 
