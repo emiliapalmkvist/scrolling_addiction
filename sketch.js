@@ -167,22 +167,15 @@ function drawRevealStage(x, y, contentW) {
 }
 
 function drawFinalStage(x, y, contentW) {
-  let isPhone = width < 500;
-
-  // Move final-stage content slightly upward on phones
-  if (isPhone) {
-    y -= 28;
-  }
-
   textAlign(LEFT, TOP);
 
   fill(yellowColor);
   textStyle(BOLD);
-  textSize(isPhone ? 20 : 23);
-  textLeading(isPhone ? 25 : 29);
+  textSize(23);
+  textLeading(29);
   text("YOU ARE ABOUT TO ENTER THE FEED.", x, y, contentW);
 
-  y += isPhone ? 72 : 88;
+  y += 88;
 
   y = drawInfoBox(
     x,
@@ -198,7 +191,7 @@ function drawFinalStage(x, y, contentW) {
     ]
   );
 
-  y += isPhone ? 9 : 14;
+  y += 14;
 
   y = drawInfoBox(
     x,
@@ -213,12 +206,12 @@ function drawFinalStage(x, y, contentW) {
     ]
   );
 
-  y += isPhone ? 14 : 22;
+  y += 22;
 
   checkbox = {
     x: x,
-    y: y + 2,
-    size: isPhone ? 21 : 24
+    y: y + 4,
+    size: 24
   };
 
   noFill();
@@ -234,29 +227,29 @@ function drawFinalStage(x, y, contentW) {
     fill(20);
     textAlign(CENTER, CENTER);
     textStyle(BOLD);
-    textSize(isPhone ? 16 : 18);
+    textSize(18);
     text("✓", checkbox.x + checkbox.size / 2, checkbox.y + checkbox.size / 2);
   }
 
   fill(230);
   textAlign(LEFT, TOP);
   textStyle(NORMAL);
-  textSize(isPhone ? 12 : 13);
-  textLeading(isPhone ? 16 : 18);
+  textSize(13);
+  textLeading(18);
   text(
     "I understand that continuing may override my original intention.",
-    x + 34,
+    x + 38,
     y,
-    contentW - 34
+    contentW - 38
   );
 
-  y += isPhone ? 48 : 62;
+  y += 62;
 
   continueBtn = {
     x: x,
     y: y,
     w: contentW,
-    h: isPhone ? 44 : 52
+    h: 52
   };
 
   if (finalChecked) {
@@ -270,133 +263,42 @@ function drawFinalStage(x, y, contentW) {
   fill(finalChecked ? 20 : 255);
   textAlign(CENTER, CENTER);
   textStyle(BOLD);
-  textSize(isPhone ? 13 : 15);
+  textSize(15);
   text(
     "Continue to Instagram",
     continueBtn.x + continueBtn.w / 2,
     continueBtn.y + continueBtn.h / 2
   );
-
-  y += isPhone ? 52 : 64;
-
-  stopBtn = {
-    x: x,
-    y: y,
-    w: contentW,
-    h: isPhone ? 42 : 48
-  };
-
-  noFill();
-  stroke(220);
-  strokeWeight(2);
-  rect(stopBtn.x, stopBtn.y, stopBtn.w, stopBtn.h, 999);
-  noStroke();
-
-  fill(230);
-  textAlign(CENTER, CENTER);
-  textStyle(BOLD);
-  textSize(isPhone ? 13 : 15);
-  text("Stop here", stopBtn.x + stopBtn.w / 2, stopBtn.y + stopBtn.h / 2);
 }
 
 function drawInfoBox(x, y, w, title, items) {
-  let isPhone = width < 500;
-
-  let titleSize = isPhone ? 10.5 : 12;
-  let itemSize = isPhone ? 11.5 : 13;
-  let itemGap = isPhone ? 16 : 21;
-  let boxH = isPhone ? 31 + items.length * itemGap + 10 : 38 + items.length * itemGap + 14;
+  let boxH = 38 + items.length * 21 + 14;
 
   fill(35);
   stroke(90);
   strokeWeight(1.5);
-  rect(x, y, w, boxH, 16);
+  rect(x, y, w, boxH, 18);
   noStroke();
 
   fill(160);
   textAlign(LEFT, TOP);
   textStyle(BOLD);
-  textSize(titleSize);
-  text(title, x + 15, y + 12);
+  textSize(12);
+  text(title, x + 16, y + 14);
 
   fill(240);
   textStyle(NORMAL);
-  textSize(itemSize);
-  textLeading(itemGap);
+  textSize(13);
+  textLeading(20);
 
-  let itemY = y + (isPhone ? 34 : 39);
+  let itemY = y + 39;
 
   for (let i = 0; i < items.length; i++) {
-    text("• " + items[i], x + 18, itemY);
-    itemY += itemGap;
+    text("• " + items[i], x + 20, itemY);
+    itemY += 21;
   }
 
   return y + boxH;
-}
-
-function drawPopup() {
-  fill(0, 190);
-  rect(0, 0, width, height);
-
-  let isPhone = width < 500;
-
-  let popupW = isPhone ? width - 50 : min(width - 50, 360);
-  let popupH = isPhone ? 280 : 330;
-
-  let popupX = (width - popupW) / 2;
-  let popupY = (height - popupH) / 2;
-
-  fill(255);
-  rect(popupX, popupY, popupW, popupH, 24);
-
-  fill(20);
-  textAlign(CENTER, TOP);
-  textStyle(BOLD);
-  textSize(isPhone ? 24 : 26);
-  text("Are you sure?", popupX + 25, popupY + 32, popupW - 50);
-
-  textStyle(NORMAL);
-  textSize(isPhone ? 16 : 17);
-  textLeading(isPhone ? 22 : 24);
-  text(
-    "You are about to open Instagram Reels.",
-    popupX + 30,
-    popupY + 90,
-    popupW - 60
-  );
-
-  let buttonW = popupW - 50;
-  let buttonH = 50;
-  let buttonX = popupX + 25;
-
-  yesBtn = {
-    x: buttonX,
-    y: popupY + popupH - 125,
-    w: buttonW,
-    h: buttonH
-  };
-
-  noBtn = {
-    x: buttonX,
-    y: popupY + popupH - 65,
-    w: buttonW,
-    h: buttonH
-  };
-
-  fill(yellowColor);
-  rect(yesBtn.x, yesBtn.y, yesBtn.w, yesBtn.h, 999);
-
-  fill(20);
-  textAlign(CENTER, CENTER);
-  textStyle(BOLD);
-  textSize(15);
-  text("Yes, continue", yesBtn.x + yesBtn.w / 2, yesBtn.y + yesBtn.h / 2);
-
-  fill(230);
-  rect(noBtn.x, noBtn.y, noBtn.w, noBtn.h, 999);
-
-  fill(20);
-  text("No, go back", noBtn.x + noBtn.w / 2, noBtn.y + noBtn.h / 2);
 }
 
 function drawNextButton(x, y, w, label) {
@@ -431,10 +333,10 @@ function handlePress(px, py) {
       return;
     }
 
-    if (over(stopBtn, px, py)) {
+    /*if (over(stopBtn, px, py)) {
       stage = 0;
       finalChecked = false;
-      return;
+      return;*/
     }
   }
 }
