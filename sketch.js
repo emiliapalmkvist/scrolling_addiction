@@ -1,4 +1,11 @@
-let instagramURL = "https://www.instagram.com/reels/";
+/*let instagramURL = "https://www.instagram.com/reels/";*/
+let instagramURLs = {
+  comparison: "https://www.instagram.com/reels/DVZgPYKE8a5/",
+  timeloss: "https://www.instagram.com/reels/DVg3DG_iGUx/",
+  compulsion: "https://www.instagram.com/reels/DU6g-DNjCy_/",
+  emptiness: "https://www.instagram.com/direct/inbox/",
+  overstimulation: "https://www.instagram.com/reels/"
+};
 let stage = 0;
 let yellowColor = "#FFCB22";
 
@@ -41,12 +48,7 @@ let nextBtn = { x: 0, y: 0, w: 0, h: 58 };
 let continueBtn = { x: 0, y: 0, w: 0, h: 60 };
 
 let checkbox = { x: 0, y: 0, size: 24 };
-let stopBtn = { x: 0, y: 0, w: 0, h: 54 };
 let finalChecked = false;
-
-let showPopup = false;
-let yesBtn = { x: 0, y: 0, w: 0, h: 50 };
-let noBtn = { x: 0, y: 0, w: 0, h: 50 };
 
 let lastTouchTime = 0;
 
@@ -293,16 +295,11 @@ function handlePress(px, py) {
 
     if (over(continueBtn, px, py)) {
       if (finalChecked) {
-        window.location.href = instagramURL;
+        window.location.href =
+          instagramURLs[currentType] || "https://www.instagram.com/reels/";
       }
       return;
     }
-
-    /*if (over(stopBtn, px, py)) {
-      stage = 0;
-      finalChecked = false;
-      return;
-    }*/
   }
 }
 
