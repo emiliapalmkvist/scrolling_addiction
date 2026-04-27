@@ -114,56 +114,21 @@ function drawQuoteStage(x, y, contentW) {
   let cardY = (height - cardH) / 2;
 
   let buttonY = cardY + cardH - 230;
-  let grayTextY = buttonY - 95;
+  let grayTextY = buttonY + 78;
+
+  drawNextButton(x, buttonY, contentW, "Continue");
 
   fill(200);
+  textAlign(LEFT, TOP);
   textStyle(NORMAL);
-  textSize(16);
-  textLeading(22);
+  textSize(14);
+  textLeading(20);
   text(
     "These are not warnings from a system.\nThey are lived experiences.",
     x,
     grayTextY,
     contentW
   );
-
-  drawNextButton(x, buttonY, contentW, "Continue");
-}
-
-function drawRevealStage(x, y, contentW) {
-  textAlign(LEFT, TOP);
-
-  fill(yellowColor);
-  textStyle(BOLD);
-  textSize(29);
-  textLeading(35);
-  text("THIS SYSTEM IS DESIGNED TO CONTINUE.", x, y, contentW);
-
-  y += 120;
-
-  fill(255);
-  textStyle(NORMAL);
-  textSize(18);
-  textLeading(28);
-
-  text("There is no natural stopping point.", x, y, contentW);
-
-  y += 55;
-
-  text(
-    "You are shown what is most likely to keep you engaged, not what is most likely to satisfy you.",
-    x,
-    y,
-    contentW
-  );
-
-  y += 115;
-
-  text("Continuation becomes easier than stopping.", x, y, contentW);
-
-  y += 120;
-
-  drawNextButton(x, y, contentW, "I understand");
 }
 
 function drawFinalStage(x, y, contentW) {
@@ -183,11 +148,11 @@ function drawFinalStage(x, y, contentW) {
     contentW,
     "POSSIBLE SIDE EFFECTS",
     [
+      "Jealousy",
+      "Compulsion",
       "Time loss",
-      "Sleep disruption",
-      "Social comparison",
-      "Compulsive continuation",
-      "Loss of awareness"
+      "Emptiness",
+      "Overstimulation"
     ]
   );
 
