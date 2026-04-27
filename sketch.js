@@ -4,7 +4,7 @@ let yellowColor = "#FFCB22";
 
 let quoteSets = {
   comparison: [
-    '"They look better here."',
+    '“I can feel inspired and at the same time feel like other people are living the life I wish I had.”',
     '"I compare myself without meaning to."',
     '"I know it is curated, but it still gets to me."'
   ],
