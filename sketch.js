@@ -95,10 +95,6 @@ function draw() {
   } else if (stage === 3) {
     drawFinalStage(x, y, contentW);
   }
-
-  if (showPopup) {
-    drawPopup();
-  }
 }
 
 function drawQuoteStage(x, y, contentW) {
