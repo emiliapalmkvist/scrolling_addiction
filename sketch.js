@@ -81,11 +81,11 @@ function draw() {
 
   y += 55;
 
-  /*if (stage <= 2) {
+  if (stage <= 2) {
   drawQuoteStage(x, y, contentW);
 } else if (stage === 3) {
   drawHoldStage(x, y, contentW);
-}*/
+}
 
   if (stage === 4) {
     if (holding) {
