@@ -171,24 +171,11 @@ function drawFinalStage(x, y, contentW) {
 
   fill(yellowColor);
   textStyle(BOLD);
-  textSize(24);
-  textLeading(30);
+  textSize(23);
+  textLeading(29);
   text("YOU ARE ABOUT TO ENTER THE FEED.", x, y, contentW);
 
-  y += 80;
-
-  fill(230);
-  textStyle(NORMAL);
-  textSize(15);
-  textLeading(21);
-  text(
-    "What begins as a quick check may become extended, repetitive, and difficult to stop.",
-    x,
-    y,
-    contentW
-  );
-
-  y += 75;
+  y += 88;
 
   y = drawInfoBox(
     x,
@@ -204,7 +191,7 @@ function drawFinalStage(x, y, contentW) {
     ]
   );
 
-  y += 20;
+  y += 14;
 
   y = drawInfoBox(
     x,
@@ -219,11 +206,11 @@ function drawFinalStage(x, y, contentW) {
     ]
   );
 
-  y += 25;
+  y += 22;
 
   checkbox = {
     x: x,
-    y: y + 3,
+    y: y + 4,
     size: 24
   };
 
@@ -247,8 +234,8 @@ function drawFinalStage(x, y, contentW) {
   fill(230);
   textAlign(LEFT, TOP);
   textStyle(NORMAL);
-  textSize(14);
-  textLeading(20);
+  textSize(13);
+  textLeading(18);
   text(
     "I understand that continuing may override my original intention.",
     x + 38,
@@ -256,13 +243,13 @@ function drawFinalStage(x, y, contentW) {
     contentW - 38
   );
 
-  y += 75;
+  y += 62;
 
   continueBtn = {
     x: x,
     y: y,
     w: contentW,
-    h: 54
+    h: 52
   };
 
   if (finalChecked) {
@@ -276,20 +263,20 @@ function drawFinalStage(x, y, contentW) {
   fill(finalChecked ? 20 : 255);
   textAlign(CENTER, CENTER);
   textStyle(BOLD);
-  textSize(16);
+  textSize(15);
   text(
     "Continue to Instagram",
     continueBtn.x + continueBtn.w / 2,
     continueBtn.y + continueBtn.h / 2
   );
 
-  y += 70;
+  y += 64;
 
   stopBtn = {
     x: x,
     y: y,
     w: contentW,
-    h: 54
+    h: 48
   };
 
   noFill();
@@ -301,12 +288,12 @@ function drawFinalStage(x, y, contentW) {
   fill(230);
   textAlign(CENTER, CENTER);
   textStyle(BOLD);
-  textSize(16);
+  textSize(15);
   text("Stop here", stopBtn.x + stopBtn.w / 2, stopBtn.y + stopBtn.h / 2);
 }
 
 function drawInfoBox(x, y, w, title, items) {
-  let boxH = 45 + items.length * 24 + 18;
+  let boxH = 38 + items.length * 21 + 14;
 
   fill(35);
   stroke(90);
@@ -317,19 +304,19 @@ function drawInfoBox(x, y, w, title, items) {
   fill(160);
   textAlign(LEFT, TOP);
   textStyle(BOLD);
-  textSize(13);
-  text(title, x + 18, y + 16);
+  textSize(12);
+  text(title, x + 16, y + 14);
 
   fill(240);
   textStyle(NORMAL);
-  textSize(15);
-  textLeading(23);
+  textSize(13);
+  textLeading(20);
 
-  let itemY = y + 45;
+  let itemY = y + 39;
 
   for (let i = 0; i < items.length; i++) {
-    text("• " + items[i], x + 22, itemY);
-    itemY += 24;
+    text("• " + items[i], x + 20, itemY);
+    itemY += 21;
   }
 
   return y + boxH;
