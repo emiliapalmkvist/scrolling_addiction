@@ -206,11 +206,11 @@ function drawFinalStage(x, y, contentW) {
 }
 
 function drawPopup() {
-  fill(0, 180);
+  fill(0, 190);
   rect(0, 0, width, height);
 
   let popupW = min(width - 50, 360);
-  let popupH = 260;
+  let popupH = 330;
   let popupX = (width - popupW) / 2;
   let popupY = (height - popupH) / 2;
 
@@ -221,7 +221,7 @@ function drawPopup() {
   textAlign(CENTER, TOP);
   textStyle(BOLD);
   textSize(24);
-  text("Are you sure?", popupX + 25, popupY + 32, popupW - 50);
+  text("Are you sure?", popupX + 25, popupY + 35, popupW - 50);
 
   textStyle(NORMAL);
   textSize(16);
@@ -229,20 +229,20 @@ function drawPopup() {
   text(
     "You are about to open Instagram Reels.",
     popupX + 35,
-    popupY + 85,
+    popupY + 95,
     popupW - 70
   );
 
   yesBtn = {
     x: popupX + 25,
-    y: popupY + 170,
+    y: popupY + 195,
     w: popupW - 50,
     h: 50
   };
 
   noBtn = {
     x: popupX + 25,
-    y: popupY + 225,
+    y: popupY + 255,
     w: popupW - 50,
     h: 50
   };
