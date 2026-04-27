@@ -39,6 +39,12 @@ let currentQuotes = [];
 let nextBtn = { x: 0, y: 0, w: 0, h: 58 };
 let continueBtn = { x: 0, y: 0, w: 0, h: 60 };
 
+let showPopup = false;
+let yesBtn = { x: 0, y: 0, w: 0, h: 50 };
+let noBtn = { x: 0, y: 0, w: 0, h: 50 };
+
+let lastTouchTime = 0;
+
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
   canvas.elt.style.touchAction = "none";
@@ -85,6 +91,10 @@ function draw() {
     drawRevealStage(x, y, contentW);
   } else if (stage === 4) {
     drawFinalStage(x, y, contentW);
+  }
+
+  if (showPopup) {
+    drawPopup();
   }
 }
 
@@ -195,6 +205,64 @@ function drawFinalStage(x, y, contentW) {
   );
 }
 
+function drawPopup() {
+  fill(0, 180);
+  rect(0, 0, width, height);
+
+  let popupW = min(width - 50, 360);
+  let popupH = 260;
+  let popupX = (width - popupW) / 2;
+  let popupY = (height - popupH) / 2;
+
+  fill(255);
+  rect(popupX, popupY, popupW, popupH, 24);
+
+  fill(20);
+  textAlign(CENTER, TOP);
+  textStyle(BOLD);
+  textSize(24);
+  text("Are you sure?", popupX + 25, popupY + 32, popupW - 50);
+
+  textStyle(NORMAL);
+  textSize(16);
+  textLeading(22);
+  text(
+    "You are about to open Instagram Reels.",
+    popupX + 35,
+    popupY + 85,
+    popupW - 70
+  );
+
+  yesBtn = {
+    x: popupX + 25,
+    y: popupY + 170,
+    w: popupW - 50,
+    h: 50
+  };
+
+  noBtn = {
+    x: popupX + 25,
+    y: popupY + 225,
+    w: popupW - 50,
+    h: 50
+  };
+
+  fill(245, 216, 63);
+  rect(yesBtn.x, yesBtn.y, yesBtn.w, yesBtn.h, 999);
+
+  fill(20);
+  textAlign(CENTER, CENTER);
+  textStyle(BOLD);
+  textSize(15);
+  text("Yes, continue", yesBtn.x + yesBtn.w / 2, yesBtn.y + yesBtn.h / 2);
+
+  fill(230);
+  rect(noBtn.x, noBtn.y, noBtn.w, noBtn.h, 999);
+
+  fill(20);
+  text("No, go back", noBtn.x + noBtn.w / 2, noBtn.y + noBtn.h / 2);
+}
+
 function drawNextButton(x, y, w, label) {
   nextBtn = { x: x, y: y, w: w, h: 58 };
 
@@ -209,27 +277,41 @@ function drawNextButton(x, y, w, label) {
 }
 
 function handlePress(px, py) {
+  if (showPopup) {
+    if (over(yesBtn, px, py)) {
+      window.location.href = instagramURL;
+      return;
+    }
+
+    if (over(noBtn, px, py)) {
+      showPopup = false;
+      return;
+    }
+
+    return;
+  }
+
   if (stage <= 3 && over(nextBtn, px, py)) {
     stage++;
     return;
   }
 
   if (stage === 4 && over(continueBtn, px, py)) {
-    let sure = confirm(
-      "Are you sure you want to continue to Instagram Reels?"
-    );
-
-    if (sure) {
-      window.location.href = instagramURL;
-    }
+    showPopup = true;
   }
 }
 
 function mousePressed() {
+  if (millis() - lastTouchTime < 500) {
+    return;
+  }
+
   handlePress(mouseX, mouseY);
 }
 
 function touchStarted() {
+  lastTouchTime = millis();
+
   if (touches.length > 0) {
     handlePress(touches[0].x, touches[0].y);
   }
