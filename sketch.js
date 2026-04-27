@@ -89,8 +89,6 @@ function draw() {
   if (stage <= 2) {
     drawQuoteStage(x, y, contentW);
   } else if (stage === 3) {
-    drawRevealStage(x, y, contentW);
-  } else if (stage === 4) {
     drawFinalStage(x, y, contentW);
   }
 
@@ -299,12 +297,12 @@ function handlePress(px, py) {
     return;
   }
 
-  if (stage <= 3 && over(nextBtn, px, py)) {
+  if (stage <= 2 && over(nextBtn, px, py)) {
     stage++;
     return;
   }
 
-  if (stage === 4 && over(continueBtn, px, py)) {
+  if (stage === 3 && over(continueBtn, px, py)) {
     showPopup = true;
   }
 }
