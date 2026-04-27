@@ -82,10 +82,12 @@ function draw() {
   y += 55;
 
   if (stage <= 2) {
-  drawQuoteStage(x, y, contentW);
-} else if (stage === 3) {
-  drawHoldStage(x, y, contentW);
-}
+    drawQuoteStage(x, y, contentW);
+  } else if (stage === 3) {
+    drawRevealStage(x, y, contentW);
+  } else if (stage === 4) {
+    drawHoldStage(x, y, contentW);
+  }
 
   if (stage === 4) {
     if (holding) {
@@ -124,8 +126,7 @@ function drawQuoteStage(x, y, contentW) {
 
   y += 120;
 
-  let label = "Continue";
-  drawNextButton(x, y, contentW, label);
+  drawNextButton(x, y, contentW, "Continue");
 }
 
 function drawRevealStage(x, y, contentW) {
