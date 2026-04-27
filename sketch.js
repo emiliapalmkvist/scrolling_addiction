@@ -336,8 +336,8 @@ function handlePress(px, py) {
     /*if (over(stopBtn, px, py)) {
       stage = 0;
       finalChecked = false;
-      return;*/
-    }
+      return;
+    }*/
   }
 }
 
