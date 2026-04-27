@@ -3,7 +3,7 @@ let instagramURLs = {
   comparison: "https://www.instagram.com/reels/DVZgPYKE8a5/",
   timeloss: "https://www.instagram.com/reels/DVg3DG_iGUx/",
   compulsion: "https://www.instagram.com/reels/DU6g-DNjCy_/",
-  emptiness: "https://www.instagram.com/direct/inbox/",
+  emptiness: "https://www.instagram.com/reels/DVHWJiBAaN3/",
   overstimulation: "https://www.instagram.com/reels/"
 };
 let stage = 0;
@@ -49,8 +49,6 @@ let continueBtn = { x: 0, y: 0, w: 0, h: 60 };
 
 let checkbox = { x: 0, y: 0, size: 24 };
 let finalChecked = false;
-
-let lastTouchTime = 0;
 
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
@@ -282,9 +280,27 @@ function drawNextButton(x, y, w, label) {
 }
 
 function handlePress(px, py) {
-  if (stage <= 2 && over(nextBtn, px, py)) {
-    stage++;
-    return;
+  if (stage <= 2) {
+    let cardW = min(width - 40, 430);
+    let cardH = min(height - 40, 760);
+    let cardX = (width - cardW) / 2;
+    let cardY = (height - cardH) / 2;
+
+    let x = cardX + 28;
+    let contentW = cardW - 56;
+    let buttonY = cardY + cardH - 230;
+
+    nextBtn = {
+      x: x,
+      y: buttonY,
+      w: contentW,
+      h: 58
+    };
+
+    if (over(nextBtn, px, py)) {
+      stage++;
+      return;
+    }
   }
 
   if (stage === 3) {
@@ -304,20 +320,11 @@ function handlePress(px, py) {
 }
 
 function mousePressed() {
-  if (millis() - lastTouchTime < 500) {
-    return;
-  }
-
   handlePress(mouseX, mouseY);
 }
 
 function touchStarted() {
-  lastTouchTime = millis();
-
-  if (touches.length > 0) {
-    handlePress(touches[0].x, touches[0].y);
-  }
-
+  handlePress(mouseX, mouseY);
   return false;
 }
 
