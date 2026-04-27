@@ -37,14 +37,12 @@ let currentType = "comparison";
 let currentQuotes = [];
 
 let nextBtn = { x: 0, y: 0, w: 0, h: 58 };
-let holdBtn = { x: 0, y: 0, w: 0, h: 60 };
-
-let holding = false;
-let holdProgress = 0;
-let holdRequired = 90;
+let continueBtn = { x: 0, y: 0, w: 0, h: 60 };
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  let canvas = createCanvas(windowWidth, windowHeight);
+  canvas.elt.style.touchAction = "none";
+
   textFont("Arial");
 
   let params = new URLSearchParams(window.location.search);
@@ -86,19 +84,7 @@ function draw() {
   } else if (stage === 3) {
     drawRevealStage(x, y, contentW);
   } else if (stage === 4) {
-    drawHoldStage(x, y, contentW);
-  }
-
-  if (stage === 4) {
-    if (holding) {
-      holdProgress++;
-
-      if (holdProgress >= holdRequired) {
-        window.location.href = instagramURL;
-      }
-    } else {
-      holdProgress = max(0, holdProgress - 3);
-    }
+    drawFinalStage(x, y, contentW);
   }
 }
 
@@ -165,7 +151,7 @@ function drawRevealStage(x, y, contentW) {
   drawNextButton(x, y, contentW, "I understand");
 }
 
-function drawHoldStage(x, y, contentW) {
+function drawFinalStage(x, y, contentW) {
   textAlign(LEFT, TOP);
 
   fill(245, 216, 63);
@@ -193,24 +179,19 @@ function drawHoldStage(x, y, contentW) {
 
   y += 120;
 
-  holdBtn = { x: x, y: y, w: contentW, h: 60 };
-
-  fill(255);
-  rect(holdBtn.x, holdBtn.y, holdBtn.w, holdBtn.h, 999);
-
-  let progressW = map(holdProgress, 0, holdRequired, 0, holdBtn.w);
+  continueBtn = { x: x, y: y, w: contentW, h: 60 };
 
   fill(245, 216, 63);
-  rect(holdBtn.x, holdBtn.y, progressW, holdBtn.h, 999);
+  rect(continueBtn.x, continueBtn.y, continueBtn.w, continueBtn.h, 999);
 
   fill(20);
   textAlign(CENTER, CENTER);
   textStyle(BOLD);
   textSize(16);
   text(
-    "Hold to continue anyway",
-    holdBtn.x + holdBtn.w / 2,
-    holdBtn.y + holdBtn.h / 2
+    "Continue anyway",
+    continueBtn.x + continueBtn.w / 2,
+    continueBtn.y + continueBtn.h / 2
   );
 }
 
@@ -227,37 +208,45 @@ function drawNextButton(x, y, w, label) {
   text(label, nextBtn.x + nextBtn.w / 2, nextBtn.y + nextBtn.h / 2);
 }
 
-function mousePressed() {
-  if (stage <= 3 && over(nextBtn)) {
+function handlePress(px, py) {
+  if (stage <= 3 && over(nextBtn, px, py)) {
     stage++;
     return;
   }
 
-  if (stage === 4 && over(holdBtn)) {
-    holding = true;
+  if (stage === 4 && over(continueBtn, px, py)) {
+    let sure = confirm(
+      "Are you sure you want to continue to Instagram Reels?"
+    );
+
+    if (sure) {
+      window.location.href = instagramURL;
+    }
   }
 }
 
-function mouseReleased() {
-  holding = false;
+function mousePressed() {
+  handlePress(mouseX, mouseY);
 }
 
 function touchStarted() {
-  mousePressed();
+  if (touches.length > 0) {
+    handlePress(touches[0].x, touches[0].y);
+  }
+
   return false;
 }
 
-function touchEnded() {
-  holding = false;
+function touchMoved() {
   return false;
 }
 
-function over(btn) {
+function over(btn, px, py) {
   return (
-    mouseX >= btn.x &&
-    mouseX <= btn.x + btn.w &&
-    mouseY >= btn.y &&
-    mouseY <= btn.y + btn.h
+    px >= btn.x &&
+    px <= btn.x + btn.w &&
+    py >= btn.y &&
+    py <= btn.y + btn.h
   );
 }
 
