@@ -209,8 +209,11 @@ function drawPopup() {
   fill(0, 190);
   rect(0, 0, width, height);
 
-  let popupW = min(width - 50, 360);
-  let popupH = 350;
+  let isPhone = width < 500;
+
+  let popupW = isPhone ? width - 50 : min(width - 50, 360);
+  let popupH = isPhone ? 280 : 330;
+
   let popupX = (width - popupW) / 2;
   let popupY = (height - popupH) / 2;
 
@@ -220,31 +223,35 @@ function drawPopup() {
   fill(20);
   textAlign(CENTER, TOP);
   textStyle(BOLD);
-  textSize(24);
-  text("Are you sure?", popupX + 25, popupY + 35, popupW - 50);
+  textSize(isPhone ? 24 : 26);
+  text("Are you sure?", popupX + 25, popupY + 32, popupW - 50);
 
   textStyle(NORMAL);
-  textSize(16);
-  textLeading(22);
+  textSize(isPhone ? 16 : 17);
+  textLeading(isPhone ? 22 : 24);
   text(
     "You are about to open Instagram Reels.",
-    popupX + 35,
-    popupY + 95,
-    popupW - 70
+    popupX + 30,
+    popupY + 90,
+    popupW - 60
   );
 
+  let buttonW = popupW - 50;
+  let buttonH = 50;
+  let buttonX = popupX + 25;
+
   yesBtn = {
-    x: popupX + 25,
-    y: popupY + 195,
-    w: popupW - 50,
-    h: 50
+    x: buttonX,
+    y: popupY + popupH - 125,
+    w: buttonW,
+    h: buttonH
   };
 
   noBtn = {
-    x: popupX + 25,
-    y: popupY + 255,
-    w: popupW - 50,
-    h: 50
+    x: buttonX,
+    y: popupY + popupH - 65,
+    w: buttonW,
+    h: buttonH
   };
 
   fill(245, 216, 63);
