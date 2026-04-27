@@ -5,7 +5,7 @@ let yellowColor = "#FFCB22";
 let quoteSets = {
   comparison: [
     '“I can feel inspired and at the same time feel like other people are living the life I wish I had.”',
-    '“I often feel like my life is boring when i scroll through instagram.”',
+    '“I often feel like my life is boring when I scroll through instagram.”',
     '“If I don’t scroll, I get FOMO.”'
   ],
 
