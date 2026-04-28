@@ -4,7 +4,7 @@ let instagramURLs = {
   timeloss: "https://www.instagram.com/reels/DVg3DG_iGUx/",
   compulsion: "https://www.instagram.com/reels/DU6g-DNjCy_/",
   emptiness: "https://www.instagram.com/reels/DVHWJiBAaN3/",
-  overstimulation: "https://www.instagram.com/reels/"
+  overstimulation: "https://www.instagram.com/reels/DV22O-ZCLi6/"
 };
 let stage = 0;
 let yellowColor = "#FFCB22";
