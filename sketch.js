@@ -1,4 +1,3 @@
-/*let instagramURL = "https://www.instagram.com/reels/";*/
 let instagramURLs = {
   comparison: "https://www.instagram.com/reels/DVZgPYKE8a5/",
   timeloss: "https://www.instagram.com/reels/DVg3DG_iGUx/",
@@ -19,7 +18,7 @@ let quoteSets = {
   timeloss: [
     '“There comes a point where I ‘wake up’ and realize how long I’ve been on my phone.”',
     '“When I scroll while my partner is home, it feels like I’m wasting our quality time.”',
-    '“I always end up scrolling no matter what i opened Instagram for.”'
+    '“I always end up scrolling no matter what I opened Instagram for.”'
   ],
 
   compulsion: [
